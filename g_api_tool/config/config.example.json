@@ -1,0 +1,9 @@
+{
+  "app": {
+    "google_api_token": "",
+    "sheets_id": ["1Y_EhhMpMfgc7VsybivTuIdLOXrURihcE1R4ZtMwrgXA"]
+  },
+  "reminders": {
+    "telegram_api_token": ""
+  }
+}
