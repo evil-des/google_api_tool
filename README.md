@@ -2,7 +2,8 @@
 
 1. [Installation](#installation)
 2. [Running](#running)
-3. [Dependencies](#dependencies)
+3. [Docker](#docker)
+4. [Dependencies](#dependencies)
 
 ## Installation
 Install all dependencies:
@@ -21,6 +22,13 @@ pip install -r requirements.txt
 ```
 cd google_api_tool/g_api_tool
 python main.py
+```
+
+## Docker
+```
+cd google_api_tool/docker
+docker-compose build
+docker-compose up -d
 ```
 
 ## Dependencies
