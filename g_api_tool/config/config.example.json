@@ -4,6 +4,7 @@
     "sheet_id": ""
   },
   "reminders": {
-    "telegram_api_token": ""
+    "telegram_api_token": "",
+    "chat_id": ""
   }
 }

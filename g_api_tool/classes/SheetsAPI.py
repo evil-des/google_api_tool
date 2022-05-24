@@ -1,8 +1,12 @@
 from googleapiclient.discovery import build
+import datetime
 
 
 class SheetsAPI:
-    def __init__(self, token, sheet_id):
+    DICT_KEYS = {"№": "id", "заказ №": "order_id", "стоимость,$":
+                 "price_usd", "срок поставки": "delivery_date"}
+
+    def __init__(self, token, sheet_id) -> None:
         """
         Creates an object representing a Google Sheets API
         :param token: api token
@@ -35,7 +39,16 @@ class SheetsAPI:
         for row in values[1:]:
             dict_ = {}
             for i, key in enumerate(values[0]):
-                dict_[key] = row[i]
+                value = row[i]
+                key_ = self.DICT_KEYS.get(key)
+
+                if key_ == "delivery_date":
+                    value = datetime.datetime.strptime(row[i], "%d.%m.%Y")
+                elif key_ in ["id", "order_id"]:
+                    value = int(row[i])
+
+                dict_[key_] = value
+
             temp.append(dict_)
 
         return temp

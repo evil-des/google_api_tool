@@ -1,3 +1,4 @@
 .idea
-g_api_tool.egg-info
+*.egg-info
 g_api_tool/config/config.json
+*g_api_tool/db/*.*
