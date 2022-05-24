@@ -4,7 +4,7 @@ from sqlalchemy import orm
 from .db_session import SqlAlchemyBase
 
 
-class Form(SqlAlchemyBase):
+class SheetData(SqlAlchemyBase):
     __tablename__ = "sheet_data"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
