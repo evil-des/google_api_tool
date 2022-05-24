@@ -1,0 +1,15 @@
+version: '1'
+
+# хранилища
+volumes:
+    pgdata:
+        driver: local
+services:
+    script:
+        restart: always
+        build:
+            context: .
+            dockerfile: python/Dockerfile
+        volumes:
+            - ./g_api_tool:/srv/www/g_api_tool
+        command: python main.py
