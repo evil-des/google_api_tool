@@ -1,6 +1,6 @@
 import asyncio
 from g_api_tool.misc import config
-from g_api_tool.app.SheetsAPI import SheetsAPI
+from g_api_tool.classes.SheetsAPI import SheetsAPI
 
 
 def run():
