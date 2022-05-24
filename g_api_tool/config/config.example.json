@@ -1,7 +1,7 @@
 {
   "app": {
     "google_api_token": "",
-    "sheets_id": [""]
+    "sheet_id": ""
   },
   "reminders": {
     "telegram_api_token": ""
