@@ -19,6 +19,13 @@ async def updating_data():
         for item in cells:
             sheet_data = db_sess.query(SheetData).filter(SheetData.order_id == item["order_id"]).first()
 
+            comparing_sheet_data = list(object_as_dict(sheet_data).values())
+            del comparing_sheet_data[3], comparing_sheet_data[-1]
+            comparing_sheet_data[-1] = datetime.datetime.strftime(comparing_sheet_data[-1], "%d.%m.%Y")
+
+            comparing_item = list(item.values())
+            comparing_item[-1] = datetime.datetime.strftime(comparing_item[-1], "%d.%m.%Y")
+
             if not sheet_data:  # if cell not in database
                 new_cell = SheetData(id=item["id"], order_id=item["order_id"], price_usd=item["price_usd"],
                                      price_rub=currency_api.get_transformed_rate(item["price_usd"]),
@@ -26,8 +33,8 @@ async def updating_data():
                 db_sess.add(new_cell)
                 msg_text = "Новая запись добавлена в базу данных"
 
-            elif collections.Counter(object_as_dict(sheet_data)) == \
-                    collections.Counter(item.values()):  # if cell is edited
+            elif collections.Counter(comparing_sheet_data) != \
+                    collections.Counter(comparing_item):  # if cell is edited
 
                 sheet_data.order_id = item["order_id"]
                 sheet_data.price_usd = item["price_usd"]
@@ -42,6 +49,7 @@ async def updating_data():
                     logging.info(f"[!] [{datetime.datetime.now()}] [#{sheet_data.order_id}] - {msg_text}")
                 except Exception as e:
                     db_sess.rollback()
+                msg_text = None
 
         # deleting unused cells
         all_sheet_data = db_sess.query(SheetData).all()

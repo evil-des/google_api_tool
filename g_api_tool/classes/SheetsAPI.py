@@ -38,17 +38,20 @@ class SheetsAPI:
         temp = []
         for row in values[1:]:
             dict_ = {}
-            for i, key in enumerate(values[0]):
-                value = row[i]
-                key_ = self.DICT_KEYS.get(key)
+            if row:
+                for i, key in enumerate(values[0]):
+                    value = row[i]
+                    key_ = self.DICT_KEYS.get(key)
 
-                if key_ == "delivery_date":
-                    value = datetime.datetime.strptime(row[i], "%d.%m.%Y")
-                elif key_ in ["id", "order_id"]:
-                    value = int(row[i])
+                    if key_ == "delivery_date":
+                        value = datetime.datetime.strptime(row[i], "%d.%m.%Y")
+                    elif key_ in ["id", "order_id"]:
+                        value = int(row[i])
+                    elif key_ == "price_usd":
+                        value = float(row[i])
 
-                dict_[key_] = value
+                    dict_[key_] = value
 
-            temp.append(dict_)
+                temp.append(dict_)
 
         return temp
